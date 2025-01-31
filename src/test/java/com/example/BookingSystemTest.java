@@ -1,5 +1,6 @@
 package com.example;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+
 class BookingSystemTest {
 
     @Mock private TimeProvider timeProvider;
@@ -28,10 +30,11 @@ class BookingSystemTest {
     private BookingSystem bookingSystem;
     private LocalDateTime testTime;
     private String generateRoomId;
+    private AutoCloseable closeable;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        closeable = MockitoAnnotations.openMocks(this);
 
         bookingSystem = new BookingSystem(timeProvider, roomRepository, notificationService);
 
@@ -44,6 +47,11 @@ class BookingSystemTest {
         when(room1.getId()).thenReturn(UUID.randomUUID().toString());
         when(room2.getId()).thenReturn(UUID.randomUUID().toString());
 
+    }
+
+    @AfterEach
+    void tearDown () throws Exception {
+        closeable.close();
     }
 
     @Test
@@ -130,6 +138,7 @@ class BookingSystemTest {
         assertFalse(result);
 
         verify(room, times(1)).isAvailable(startTime,endTime);
+
     }
 
     @Test
@@ -146,6 +155,7 @@ class BookingSystemTest {
 
         verify(room, times(1)).isAvailable(startTime,endTime);
         verify(roomRepository, times(1)).findById(roomId);
+
     }
 
 
@@ -196,6 +206,7 @@ class BookingSystemTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> bookingSystem.getAvailableRooms(startTime, null));
 
         assertEquals("Måste ange både start- och sluttid", exception.getMessage());
+
     }
 
     @Test
@@ -206,6 +217,7 @@ class BookingSystemTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> bookingSystem.getAvailableRooms(startTime, endTime));
 
         assertEquals("Sluttid måste vara efter starttid", exception.getMessage());
+
     }
 
     @Test
@@ -230,6 +242,7 @@ class BookingSystemTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> bookingSystem.cancelBooking(null));
 
         assertEquals("Boknings-id kan inte vara null", exception.getMessage());
+
     }
 
     @Test
@@ -251,6 +264,7 @@ class BookingSystemTest {
 
         verify(room2, times(1)).removeBooking(bookingId);
         verify(roomRepository, times(1)).save(room2);
+
     }
 
     @Test
@@ -261,6 +275,7 @@ class BookingSystemTest {
 
         assertFalse(bookingSystem.cancelBooking(bookingId));
         verify(roomRepository, times(1)).findAll();
+
     }
 
     @Test
@@ -295,7 +310,7 @@ class BookingSystemTest {
         boolean result = bookingSystem.cancelBooking(bookingId);
 
         assertTrue(result);
-        verify(notificationService, times(1)).sendBookingConfirmation(booking);
+        verify(notificationService, times(1)).sendCancellationConfirmation(booking);
 
     }
 
@@ -315,6 +330,7 @@ class BookingSystemTest {
 
         assertTrue(result);
         verify(notificationService, times(1)).sendCancellationConfirmation(booking);
+
     }
 
 }
