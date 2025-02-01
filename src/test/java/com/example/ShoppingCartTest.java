@@ -71,4 +71,12 @@ public class ShoppingCartTest {
         assertEquals(2, shoppingCart.getNumberOfItems());
     }
 
+    @Test
+    void removeNegativeQuantityDoesNotChangeShoppingCart() {
+        shoppingCart.addItem(book, 2);
+        shoppingCart.removeItem(book, -1);
+        assertEquals(2, shoppingCart.getTotalQuantity());
+        assertEquals(1, shoppingCart.getNumberOfItems());
+    }
+
 }
