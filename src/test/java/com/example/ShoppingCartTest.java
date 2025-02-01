@@ -13,7 +13,7 @@ public class ShoppingCartTest {
         Item item = new Item();
         shoppingCart.addItem(item, 1);
         assertEquals(1, item.getQuantity());
-
+        assertEquals(1, shoppingCart.getTotalQuantity());
 
     }
 
