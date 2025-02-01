@@ -55,5 +55,12 @@ public class ShoppingCartTest {
         assertEquals(0, shoppingCart.getNumberOfItems());
     }
 
+    @Test
+    void cannotAddNegativeQuantity() {
+        shoppingCart.addItem(book, 1);
+        shoppingCart.addItem(book, -1);
+        assertEquals(1, shoppingCart.getTotalQuantity());
+        assertEquals(1, shoppingCart.getNumberOfItems());
+    }
 
 }
