@@ -109,5 +109,13 @@ public class ShoppingCartTest {
         assertEquals(0, shoppingCart.getNumberOfItems());
     }
 
+    @Test
+    void removingMoreItemsThenAvailableResultsInZeroItem () {
+        shoppingCart.addItem(book, 3);
+        shoppingCart.removeItem(book, 5);
+
+        assertEquals(0, shoppingCart.getTotalQuantity());
+        assertEquals(0, shoppingCart.getNumberOfItems());
+    }
 
 }
