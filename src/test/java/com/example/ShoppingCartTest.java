@@ -11,6 +11,7 @@ public class ShoppingCartTest {
     void addOneItemInShoppingCart() {
         ShoppingCart shoppingCart = new ShoppingCart();
         Item item = new Item();
+        shoppingCart.addItem(item);
 
 
     }
