@@ -118,4 +118,17 @@ public class ShoppingCartTest {
         assertEquals(0, shoppingCart.getNumberOfItems());
     }
 
+    @Test
+    void removingItemThatDoesNotExistInShoppingCartDoesNotChangeShoppingCart() {
+        shoppingCart.addItem(book, 3);
+        shoppingCart.removeItem(book, 3);
+        shoppingCart.removeItem(book, 1);
+        assertEquals(0, shoppingCart.getTotalQuantity());
+        assertEquals(0, shoppingCart.getNumberOfItems());
+    }
+
+
+
+
+
 }
