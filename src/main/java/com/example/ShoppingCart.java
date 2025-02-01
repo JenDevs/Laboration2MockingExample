@@ -11,6 +11,9 @@ public class ShoppingCart {
         items = new ArrayList<>();
     }
     public void addItem(Item item, int quantity) {
+        if(quantity <= 0)
+            return;
+
         for(Item itemExist : items) {
             if(itemExist == item) {
                 itemExist.setQuantity(itemExist.getQuantity() + quantity);

@@ -27,7 +27,6 @@ public class ShoppingCartTest {
 
     }
 
-
     @Test
     void addDifferentItemsToShoppingCart() {
         shoppingCart.addItem(book, 1);
@@ -46,6 +45,14 @@ public class ShoppingCartTest {
         assertEquals(3, shoppingCart.getTotalQuantity());
         assertEquals(1, shoppingCart.getNumberOfItems());
 
+    }
+
+    @Test
+    void addZeroItemsDoesNotChangeShoppingCart() {
+        shoppingCart.addItem(record, 0);
+
+        assertEquals(0, shoppingCart.getTotalQuantity());
+        assertEquals(0, shoppingCart.getNumberOfItems());
     }
 
 
