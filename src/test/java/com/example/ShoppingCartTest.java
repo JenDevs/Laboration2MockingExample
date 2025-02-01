@@ -127,6 +127,16 @@ public class ShoppingCartTest {
         assertEquals(0, shoppingCart.getNumberOfItems());
     }
 
+    @Test
+    void removeLargeQuantityOfItemDoesRemoveTheLargeAmountOfItem () {
+        shoppingCart.addItem(book, 100);
+        shoppingCart.addItem(record, 100);
+        shoppingCart.removeItem(book, 100);
+        assertEquals(100, shoppingCart.getTotalQuantity());
+        assertEquals(1, shoppingCart.getNumberOfItems());
+    }
+
+
 
 
 
