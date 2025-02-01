@@ -59,6 +59,7 @@ public class ShoppingCartTest {
     void cannotAddNegativeQuantity() {
         shoppingCart.addItem(book, 1);
         shoppingCart.addItem(book, -1);
+
         assertEquals(1, shoppingCart.getTotalQuantity());
         assertEquals(1, shoppingCart.getNumberOfItems());
     }
@@ -67,6 +68,7 @@ public class ShoppingCartTest {
     void addLargeQuantityOfItemWorks() {
         shoppingCart.addItem(book, 100);
         shoppingCart.addItem(record, 100);
+
         assertEquals(200, shoppingCart.getTotalQuantity());
         assertEquals(2, shoppingCart.getNumberOfItems());
     }
@@ -75,6 +77,7 @@ public class ShoppingCartTest {
     void removeNegativeQuantityDoesNotChangeShoppingCart() {
         shoppingCart.addItem(book, 2);
         shoppingCart.removeItem(book, -1);
+
         assertEquals(2, shoppingCart.getTotalQuantity());
         assertEquals(1, shoppingCart.getNumberOfItems());
     }
@@ -83,6 +86,7 @@ public class ShoppingCartTest {
     void removingZeroItemDoesNotChangeShoppingCart() {
         shoppingCart.addItem(book, 1);
         shoppingCart.removeItem(book, 0);
+
         assertEquals(1, shoppingCart.getTotalQuantity());
         assertEquals(1, shoppingCart.getNumberOfItems());
     }
@@ -91,10 +95,19 @@ public class ShoppingCartTest {
     void removingOneItemRemoveOneItemInShoppingCart () {
         shoppingCart.addItem(book, 3);
         shoppingCart.removeItem(book, 1);
+
         assertEquals(2, shoppingCart.getTotalQuantity());
         assertEquals(1, shoppingCart.getNumberOfItems());
     }
 
+    @Test
+    void removingAllOfAnItemRemovesItFromShoppingCart() {
+        shoppingCart.addItem(book, 3);
+        shoppingCart.removeItem(book, 3);
+
+        assertEquals(0, shoppingCart.getTotalQuantity());
+        assertEquals(0, shoppingCart.getNumberOfItems());
+    }
 
 
 }
