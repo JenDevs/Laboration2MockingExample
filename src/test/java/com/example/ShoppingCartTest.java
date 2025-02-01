@@ -26,6 +26,12 @@ public class ShoppingCartTest {
 
     }
 
+    @Test
+    void totalQuantityInShoppingCartIsCorrect() {
+        shoppingCart.addItem(book, 2);
+        assertEquals(2, shoppingCart.getTotalQuantity());
+    }
+
 
 
 }

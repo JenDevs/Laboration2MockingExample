@@ -1,11 +1,16 @@
 package com.example;
 
 public class ShoppingCart {
-    public void addItem(Item item, int i) {
+
+    private int totalQuantity = 0;
+
+    public void addItem(Item item, int quantity) {
+        item.setQuantity(quantity);
+        totalQuantity += quantity;
 
     }
 
     public int getTotalQuantity() {
-        return 1;
+        return totalQuantity;
     }
 }
