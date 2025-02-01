@@ -6,6 +6,7 @@ import java.util.List;
 public class ShoppingCart {
 
     private List<Item> items;
+    private double discount = 0.0;
 
     public ShoppingCart() {
         items = new ArrayList<>();
@@ -57,5 +58,18 @@ public class ShoppingCart {
                 .mapToDouble(item -> item.getPrice() * item.getQuantity())
                 .sum();
 
+    }
+
+
+    public void applyDiscount(double discountInPercentage) {
+        if(discountInPercentage < 0 || discountInPercentage > 100) {
+            throw new IllegalArgumentException("Discount must be between 0 and 100");
+        }
+        this.discount = discountInPercentage;
+    }
+
+    public double priceAfterDiscount() {
+        double totalPrice = calculateTotalPrice();
+        return totalPrice * (1 - discount / 100);
     }
 }

@@ -144,12 +144,23 @@ public class ShoppingCartTest {
         double expectedTotalPrice = (3 * book.getPrice()) + (5 * record.getPrice());
         double actualTotalPrice = shoppingCart.calculateTotalPrice();
         assertEquals(expectedTotalPrice,actualTotalPrice);
-
     }
 
+    @Test
+    void applyDiscountReducesTotalPrice() {
+        shoppingCart.addItem(book, 4);
+        shoppingCart.addItem(record, 5);
+
+        double totalPriceBeforeDiscount = shoppingCart.calculateTotalPrice();
+        double discount = 10;
+
+        shoppingCart.applyDiscount(discount);
+
+        double expectedPriceAfterDiscount = totalPriceBeforeDiscount * (1 - discount/100);
+        double actualPriceAfterDiscount = shoppingCart.priceAfterDiscount();
+        assertEquals(expectedPriceAfterDiscount,actualPriceAfterDiscount);
 
 
-
-
+    }
 
 }
