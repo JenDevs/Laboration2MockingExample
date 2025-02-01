@@ -63,4 +63,12 @@ public class ShoppingCartTest {
         assertEquals(1, shoppingCart.getNumberOfItems());
     }
 
+    @Test
+    void addLargeQuantityOfItemWorks() {
+        shoppingCart.addItem(book, 100);
+        shoppingCart.addItem(record, 100);
+        assertEquals(200, shoppingCart.getTotalQuantity());
+        assertEquals(2, shoppingCart.getNumberOfItems());
+    }
+
 }
