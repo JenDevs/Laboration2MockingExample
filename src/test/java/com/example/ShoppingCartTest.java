@@ -9,13 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ShoppingCartTest {
     private ShoppingCart shoppingCart;
     private Item book;
-
+    private Item record;
 
 
     @BeforeEach
     public void setUp() {
         shoppingCart = new ShoppingCart();
         book = new Item();
+        record = new Item();
     }
 
     @Test
@@ -32,6 +33,14 @@ public class ShoppingCartTest {
         assertEquals(2, shoppingCart.getTotalQuantity());
     }
 
+    @Test
+    void addDifferentItemsToShoppingCart() {
+        shoppingCart.addItem(book, 1);
+        shoppingCart.addItem(record, 2);
+
+        assertEquals(3, shoppingCart.getTotalQuantity());
+        assertEquals(2, shoppingCart.getNumberOfItems());
+    }
 
 
 }
