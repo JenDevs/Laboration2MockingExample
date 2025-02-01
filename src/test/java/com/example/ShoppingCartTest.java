@@ -42,5 +42,16 @@ public class ShoppingCartTest {
         assertEquals(2, shoppingCart.getNumberOfItems());
     }
 
+    @Test
+    void addMoreThanOneOfTheSameItemInShoppingCart() {
+        shoppingCart.addItem(book, 1);
+        shoppingCart.addItem(book, 2);
+
+        assertEquals(3, book.getQuantity());
+        assertEquals(3, shoppingCart.getTotalQuantity());
+        assertEquals(1, shoppingCart.getNumberOfItems());
+
+    }
+
 
 }
