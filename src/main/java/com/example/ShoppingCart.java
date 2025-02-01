@@ -35,7 +35,7 @@ public class ShoppingCart {
     }
 
     public void removeItem(Item item, int quantity) {
-        if(quantity < 0)
+        if(quantity <= 0)
             return;
 
         for(Item itemExist : items) {
