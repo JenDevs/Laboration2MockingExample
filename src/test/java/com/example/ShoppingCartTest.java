@@ -15,8 +15,8 @@ public class ShoppingCartTest {
     @BeforeEach
     public void setUp() {
         shoppingCart = new ShoppingCart();
-        book = new Item(150);
-        record = new Item(200);
+        book = new Item("Book", 150);
+        record = new Item("Record",200);
     }
 
     @Test

@@ -14,12 +14,12 @@ public class ShoppingCart {
         if(quantity <= 0)
             return;
 
-        for(Item itemExist : items) {
-            if(itemExist == item) {
-                itemExist.setQuantity(itemExist.getQuantity() + quantity);
+        for (Item existingItem : items) {
+            if(existingItem.getName().equals(item.getName())) {
+                existingItem.setQuantity(existingItem.getQuantity() + quantity);
                 return;
             }
-        }
+         }
 
         item.setQuantity(quantity);
         items.add(item);
@@ -38,18 +38,17 @@ public class ShoppingCart {
         if(quantity <= 0)
             return;
 
-        for(Item itemExist : items) {
-            if(itemExist == item) {
-                int newQuantity = itemExist.getQuantity() - quantity;
+        for (int i = 0; i < items.size(); i++) {
+            if(items.get(i).getName().equals(item.getName())) {
+                int newQuantity = items.get(i).getQuantity() - quantity;
                 if(newQuantity > 0) {
-                    itemExist.setQuantity(newQuantity);
+                    items.get(i).setQuantity(newQuantity);
                 } else {
-                    items.remove(itemExist);
+                    items.remove(i);
                 }
                 return;
             }
         }
-
 
     }
 
