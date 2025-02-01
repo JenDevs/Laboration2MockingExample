@@ -15,8 +15,8 @@ public class ShoppingCartTest {
     @BeforeEach
     public void setUp() {
         shoppingCart = new ShoppingCart();
-        book = new Item();
-        record = new Item();
+        book = new Item(150);
+        record = new Item(200);
     }
 
     @Test
@@ -134,6 +134,17 @@ public class ShoppingCartTest {
         shoppingCart.removeItem(book, 100);
         assertEquals(100, shoppingCart.getTotalQuantity());
         assertEquals(1, shoppingCart.getNumberOfItems());
+    }
+
+    @Test
+    void calculateTotalPriceReturnsCorrectSum () {
+        shoppingCart.addItem(book, 3);
+        shoppingCart.addItem(record, 5);
+
+        double expectedTotalPrice = (3 * book.getPrice()) + (5 * record.getPrice());
+        double actualTotalPrice = shoppingCart.calculateTotalPrice();
+        assertEquals(expectedTotalPrice,actualTotalPrice);
+
     }
 
 

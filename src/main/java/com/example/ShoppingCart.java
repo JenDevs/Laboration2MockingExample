@@ -52,4 +52,11 @@ public class ShoppingCart {
 
 
     }
+
+    public double calculateTotalPrice() {
+        return items.stream()
+                .mapToDouble(item -> item.getPrice() * item.getQuantity())
+                .sum();
+
+    }
 }
