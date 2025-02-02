@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ShoppingCart {
 
-    private List<Item> items;
+    private final List<Item> items;
     private double discount = 0.0;
 
     public ShoppingCart() {
