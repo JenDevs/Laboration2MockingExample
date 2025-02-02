@@ -141,7 +141,8 @@ public class ShoppingCartTest {
         shoppingCart.addItem(book, 3);
         shoppingCart.addItem(record, 5);
 
-        double expectedTotalPrice = (3 * book.getPrice()) + (5 * record.getPrice());
+        double expectedTotalPrice = (book.getQuantity() * book.getPrice()) +
+                (record.getPrice() * record.getQuantity());
         double actualTotalPrice = shoppingCart.calculateTotalPrice();
         assertEquals(expectedTotalPrice,actualTotalPrice);
     }
